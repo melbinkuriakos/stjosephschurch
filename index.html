@@ -48,7 +48,7 @@
     var formLink = `https://docs.google.com/forms/d/e/1FAIpQLSdURySPbcSV6NQAAIH95F95xA0MXZRvp6QXyKLkd3V3V7urhg/viewform?usp=pp_url&entry.465178503=${encodeURIComponent(name)}&entry.1930638774=${encodeURIComponent(houseName)}&entry.705081704=${encodeURIComponent(wardName)}&entry.1716642599=${encodeURIComponent(whatsappNumber)}`;
 
     // Send the data to Google Sheets
-    var whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Please fill out this form: ' + formLink)}`;
+    var whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('ഹലോ, നമ്മുടെ  പുതിയ പള്ളിക്ക് വേണ്ടി ഫണ്ട് സ്പോൺസർ ചെയ്യാൻ തയ്യാറുള്ള ആളുകളെ ചേർക്കുന്നതിനുള്ള ലിങ്കാണിത്. വ്യക്തിയുടെ വിശദാംശങ്ങൾ സമർപ്പിക്കുന്നതിന് ദയവായി ഇനിപ്പറയുന്ന ലിങ്കിൽ ക്ലിക്കുചെയ്യുക: \n\n' + formLink)}`;
     window.open(whatsappLink, '_blank');
     fetch('https://script.google.com/macros/s/AKfycbwkStqBLK-EFZlUtvQrZbneHempLMkuAu02Tlx9cDVefXkYT6JZTdKTVutz0BgG72v-qA/exec', {
       method: 'POST',
