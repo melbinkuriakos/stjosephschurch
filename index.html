@@ -48,6 +48,8 @@
     var formLink = `https://docs.google.com/forms/d/e/1FAIpQLSdURySPbcSV6NQAAIH95F95xA0MXZRvp6QXyKLkd3V3V7urhg/viewform?usp=pp_url&entry.465178503=${encodeURIComponent(name)}&entry.1930638774=${encodeURIComponent(houseName)}&entry.705081704=${encodeURIComponent(wardName)}&entry.1716642599=${encodeURIComponent(whatsappNumber)}`;
 
     // Send the data to Google Sheets
+    var whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Please fill out this form: ' + formLink)}`;
+    window.open(whatsappLink, '_blank');
     fetch('https://script.google.com/macros/s/AKfycbwkStqBLK-EFZlUtvQrZbneHempLMkuAu02Tlx9cDVefXkYT6JZTdKTVutz0BgG72v-qA/exec', {
       method: 'POST',
       body: JSON.stringify({name, houseName, wardName, whatsappNumber, formLink})
