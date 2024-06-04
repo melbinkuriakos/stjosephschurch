@@ -10,7 +10,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <h1 class="text-center">Sponsor Forms</h1>
+      <h1 class="text-center">Sponsor Form</h1>
       <form id="sponsorForm">
         <div class="form-group">
           <label for="name">Name of the Sponsor</label>
@@ -28,7 +28,8 @@
           <label for="whatsappNumber">Sponsor WhatsApp Number</label>
           <input type="text" class="form-control" id="whatsappNumber" required>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-secondary ">Clear All</button>
       </form>
     </div>
   </div>
@@ -47,9 +48,9 @@
     var formLink = `https://docs.google.com/forms/d/e/1FAIpQLSdURySPbcSV6NQAAIH95F95xA0MXZRvp6QXyKLkd3V3V7urhg/viewform?usp=pp_url&entry.465178503=${encodeURIComponent(name)}&entry.1930638774=${encodeURIComponent(houseName)}&entry.705081704=${encodeURIComponent(wardName)}&entry.1716642599=${encodeURIComponent(whatsappNumber)}`;
 
     // Send the data to Google Sheets
-    fetch('https://script.google.com/macros/s/AKfycby3kt5gOPwmY6FZ8WQSUMxUqyDhuwmGpL9wnGeoNa20R_yTvirrRC8V36fvfcmJj0ruJg/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbwkStqBLK-EFZlUtvQrZbneHempLMkuAu02Tlx9cDVefXkYT6JZTdKTVutz0BgG72v-qA/exec', {
       method: 'POST',
-      body: JSON.stringify({name, houseName, wardName, whatsappNumber})
+      body: JSON.stringify({name, houseName, wardName, whatsappNumber, formLink})
     }).then(response => response.json())
       .then(data => {
         console.log('ledwehdkjewhkjhewjkfhkewjfhkjewhfjkewhfkjwekjfhwejkhfkjwehfkwhfwhjk');
