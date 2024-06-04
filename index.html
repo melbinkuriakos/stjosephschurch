@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sponsor Form</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="text-center">Sponsor Form</h1>
+      <form id="sponsorForm">
+        <div class="form-group">
+          <label for="name">Name of the Sponsor</label>
+          <input type="text" class="form-control" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="houseName">Sponsor House Name</label>
+          <input type="text" class="form-control" id="houseName" required>
+        </div>
+        <div class="form-group">
+          <label for="wardName">Sponsor Ward Name</label>
+          <input type="text" class="form-control" id="wardName" required>
+        </div>
+        <div class="form-group">
+          <label for="whatsappNumber">Sponsor WhatsApp Number</label>
+          <input type="text" class="form-control" id="whatsappNumber" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('sponsorForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var name = document.getElementById('name').value;
+    var houseName = document.getElementById('houseName').value;
+    var wardName = document.getElementById('wardName').value;
+    var whatsappNumber = document.getElementById('whatsappNumber').value;
+
+    // Generate the Google Form link
+    var formLink = `https://docs.google.com/forms/d/e/1FAIpQLSdURySPbcSV6NQAAIH95F95xA0MXZRvp6QXyKLkd3V3V7urhg/viewform?usp=pp_url&entry.465178503=${encodeURIComponent(name)}&entry.1930638774=${encodeURIComponent(houseName)}&entry.705081704=${encodeURIComponent(wardName)}&entry.1716642599=${encodeURIComponent(whatsappNumber)}`;
+
+    // Send the data to Google Sheets
+    fetch('https://script.google.com/macros/s/AKfycby3kt5gOPwmY6FZ8WQSUMxUqyDhuwmGpL9wnGeoNa20R_yTvirrRC8V36fvfcmJj0ruJg/exec', {
+      method: 'POST',
+      body: JSON.stringify({name, houseName, wardName, whatsappNumber})
+    }).then(response => response.json())
+      .then(data => {
+        console.log('ledwehdkjewhkjhewjkfhkewjfhkjewhfjkewhfkjwekjfhwejkhfkjwehfkwhfwhjk');
+        if (data.success) {
+          // Open WhatsApp with the generated link
+          var whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Please fill out this form: ' + formLink)}`;
+          window.open(whatsappLink, '_blank');
+        } else {
+          alert('There was an error sending the data.');
+        }
+      });
+  });
+</script>
+</body>
+</html>
