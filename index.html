@@ -13,19 +13,37 @@
       <h1 class="text-center">Sponsor Form</h1>
       <form id="sponsorForm">
         <div class="form-group">
-          <label for="name">Name of the Sponsor</label>
+          <label for="name">സ്പോൺസറുടെ പേര്</label>
           <input type="text" class="form-control" id="name" required>
         </div>
         <div class="form-group">
-          <label for="houseName">Sponsor House Name</label>
+          <label for="houseName">സ്പോൺസറുടെ വീട്ടുപേര് </label>
           <input type="text" class="form-control" id="houseName" required>
         </div>
         <div class="form-group">
-          <label for="wardName">Sponsor Ward Name</label>
-          <input type="text" class="form-control" id="wardName" required>
+          <label class="control-label col-sm-offset-2 col-sm-2" for="wardName">സ്പോൺസറുടെ വാർഡിന്റെ പേര് </label>
+          <select id="wardName" class="form-control" required>
+            <option value="Saint Antony">Saint Antony</option>
+            <option value="Saint Paul">Saint Paul</option>
+            <option value="Saint Peter">Saint Peter</option>
+            <option value="Saint John">Saint John</option>
+            <option value="Saint Mathew">Saint Mathew</option>
+            <option value="Saint Joseph Ward 1">Saint Joseph Ward 1</option>
+            <option value="Saint Joseph Ward 2">Saint Joseph Ward 2</option>
+            <option value="Saint Mary">Saint Mary</option>
+            <option value="Saint Domenic Savio">Saint Domenic Savio</option>
+            <option value="Saint Jude">Saint Jude</option>
+            <option value="Saint Thomas">Saint Thomas</option>
+            <option value="Saint Maria Gorethi">Saint Maria Gorethi</option>
+            <option value="Saint Sebastian">Saint Sebastian</option>
+            <option value="Saint George">Saint George</option>
+            <option value="Saint Alphonsa">Saint Alphonsa</option>
+            <option value="Saint Kochu Theresa">Saint Kochu Theresa</option>
+
+          </select>
         </div>
         <div class="form-group">
-          <label for="whatsappNumber">Sponsor WhatsApp Number</label>
+          <label for="whatsappNumber">സ്പോൺസറുടെ whatsapp നമ്പർ (10 അക്കം)</label>
           <input type="text" class="form-control" id="whatsappNumber" required>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -48,7 +66,7 @@
     var formLink = `https://docs.google.com/forms/d/e/1FAIpQLSdURySPbcSV6NQAAIH95F95xA0MXZRvp6QXyKLkd3V3V7urhg/viewform?usp=pp_url&entry.465178503=${encodeURIComponent(name)}&entry.1930638774=${encodeURIComponent(houseName)}&entry.705081704=${encodeURIComponent(wardName)}&entry.1716642599=${encodeURIComponent(whatsappNumber)}`;
 
     // Send the data to Google Sheets
-    var whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('ഹലോ, നമ്മുടെ  പുതിയ പള്ളിക്ക് വേണ്ടി ഫണ്ട് സ്പോൺസർ ചെയ്യാൻ തയ്യാറുള്ള ആളുകളെ ചേർക്കുന്നതിനുള്ള ലിങ്കാണിത്. വ്യക്തിയുടെ വിശദാംശങ്ങൾ സമർപ്പിക്കുന്നതിന് ദയവായി ഇനിപ്പറയുന്ന ലിങ്കിൽ ക്ലിക്കുചെയ്യുക: \n\n' + formLink)}`;
+    var whatsappLink = `https://wa.me/${'91'+whatsappNumber}?text=${encodeURIComponent('ഹലോ, നമ്മുടെ  പുതിയ പള്ളിക്ക് വേണ്ടി ഫണ്ട് സ്പോൺസർ ചെയ്യാൻ തയ്യാറുള്ള ആളുകളെ ചേർക്കുന്നതിനുള്ള ലിങ്കാണിത്. വ്യക്തിയുടെ വിശദാംശങ്ങൾ സമർപ്പിക്കുന്നതിന് ദയവായി ഇനിപ്പറയുന്ന ലിങ്കിൽ ക്ലിക്കുചെയ്യുക: \n\n' + formLink)}`;
     window.open(whatsappLink, '_blank');
     fetch('https://script.google.com/macros/s/AKfycbwkStqBLK-EFZlUtvQrZbneHempLMkuAu02Tlx9cDVefXkYT6JZTdKTVutz0BgG72v-qA/exec', {
       method: 'POST',
