@@ -90,15 +90,15 @@
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     }).then(response => response.json())
-      .then(data => {
-        console.log(data);
-        if (data.success) {
+      .then(revData => {
+        console.log(revData);
+        if (revData.success) {
           $('#successModal').modal('show');
           document.getElementById('dataForm').reset();
         } else {
-          alert('There was an error saving the data: ' + data.error);
+          alert('There was an error saving the data: ' + revData.error);
         }
       }).catch(error => {
       console.error('Error:', error);
