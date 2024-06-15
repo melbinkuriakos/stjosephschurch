@@ -85,12 +85,12 @@
       sponsorWhatsapp: sponsorWhatsapp
     };
 
-    fetch('https://script.google.com/macros/s/AKfycby3N7wFs1nOijZWIsukcitTb6jxDT72RNN51wlZ6gEArt7c5k4PTCo2bgT_TtOVtQ5ltw/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxoZwy9F7CBIOEFgn6XwP6E0gehhLskDmBs6GWrib6ElBSKmRho3VDRv1em3s3N11wfhg/exec', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     }).then(response => response.json())
       .then(data => {
         console.log(data);
