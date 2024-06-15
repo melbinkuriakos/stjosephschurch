@@ -85,15 +85,15 @@
       sponsorWhatsapp: sponsorWhatsapp
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbzSwhCxD2443zfsUeD8dKuxqvBLTZ13oA-bklfsvunsFXgeil0DMXoKRu7f3HauyStx0A/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbyAVgA458GLGZ0zOPEnN3Y9aU7UknBMT4WgpACKHuF-f-6xQ5iJVlwZLnCBxMId0TZSUQ/exec', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data),
-      mode: 'no-cors'
     }).then(response => response.json())
       .then(data => {
+        console.log(data);
         if (data.success) {
           $('#successModal').modal('show');
           document.getElementById('dataForm').reset();
