@@ -37,6 +37,28 @@
         <input type="text" class="form-control" id="houseName" required>
       </div>
       <div class="form-group">
+          <label class="control-label col-sm-offset-2 col-sm-2" for="wardName">സ്പോൺസറുടെ വാർഡിന്റെ പേര് </label>
+          <select id="wardName" class="form-control" required>
+            <option value="Saint Antony">Saint Antony</option>
+            <option value="Saint Paul">Saint Paul</option>
+            <option value="Saint Peter">Saint Peter</option>
+            <option value="Saint John">Saint John</option>
+            <option value="Saint Mathew">Saint Mathew</option>
+            <option value="Saint Joseph Ward 1">Saint Joseph Ward 1</option>
+            <option value="Saint Joseph Ward 2">Saint Joseph Ward 2</option>
+            <option value="Saint Mary">Saint Mary</option>
+            <option value="Saint Domenic Savio">Saint Domenic Savio</option>
+            <option value="Saint Jude">Saint Jude</option>
+            <option value="Saint Thomas">Saint Thomas</option>
+            <option value="Saint Maria Gorethi">Saint Maria Gorethi</option>
+            <option value="Saint Sebastian">Saint Sebastian</option>
+            <option value="Saint George">Saint George</option>
+            <option value="Saint Alphonsa">Saint Alphonsa</option>
+            <option value="Saint Kochu Theresa">Saint Kochu Theresa</option>
+
+          </select>
+        </div>
+      <div class="form-group">
         <label for="sponsorWhatsapp">Whatsapp number of the sponsor:</label>
         <input type="text" class="form-control" id="sponsorWhatsapp" pattern="\d{10}">
       </div>
@@ -75,6 +97,7 @@
     var donorWhatsapp = document.getElementById('donorWhatsapp').value;
     var sponsorName = document.getElementById('sponsorName').value;
     var houseName = document.getElementById('houseName').value;
+    var wardName = document.getElementById('wardName').value;
     var sponsorWhatsapp = document.getElementById('sponsorWhatsapp').value;
 
     var data = {
@@ -82,10 +105,11 @@
       donorWhatsapp: donorWhatsapp,
       sponsorName: sponsorName,
       houseName: houseName,
-      sponsorWhatsapp: sponsorWhatsapp
+      wardName: wardName,
+      sponsorWhatsapp: sponsorWhatsapp,
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbzcjwYU6YV7-Tj7GllMXKAdKw9pTGOA5Ba74NXy4-wsPbEofUj1eD33KYFWJlwjlj_xzg/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbx4pykHSd2SVOu2pJnCC26Mcjzka59977gjzPMunBqIyX4SCYxmuMY7ltC72TaR0Ni-rQ/exec', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
