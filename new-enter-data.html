@@ -3,18 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Title</title>
+  <title>Church fund donor's data collection form</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <style>
     .form-section {
       margin-bottom: 30px;
     }
+    .form-control{
+      height:44px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #000000;
+    }
+    label {
+      color: #555555;
+      font-weight: normal;
+      font-size: 15px;
+    }
+    .headingg{
+      color: brown;
+    }
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      z-index: 1000;
+    }
+    .modal-con{
+      color: brown;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .btn{
+      font-size: 17px;
+    }
   </style>
 </head>
 <body>
 <div class="container">
-  <h1 Style="color:orange" class="text-center">Church fund donor's data collections</h1>
-  <h3 class="text-center">Donor Details</h3>
+  <h4 class="text-center headingg">Donor Details</h4>
   <form id="dataForm">
     <div class="form-section">
       <div class="form-group">
@@ -26,7 +63,7 @@
         <input type="text" class="form-control" id="donorWhatsapp" pattern="\d{10}" required>
       </div>
     </div>
-    <h3 class="text-center">Sponsor's Details</h3>
+    <h4 class="text-center headingg">Sponsor's Details</h4>
     <div class="form-section">
       <div class="form-group">
         <label for="sponsorName">Name of the sponsor:</label>
@@ -37,36 +74,37 @@
         <input type="text" class="form-control" id="houseName" required>
       </div>
       <div class="form-group">
-          <label for="wardName">Sponser Ward Name</label>
-          <select id="wardName" class="form-control" required>
-            <option value="01 Saint Antony">01 Saint Antony</option>
-            <option value="02 Saint Paul">02 Saint Paul</option>
-            <option value="03 Saint Peter">03 Saint Peter</option>
-            <option value="04 Saint John">04 Saint John</option>
-            <option value="05 Saint Mathew">05 Saint Mathew</option>
-            <option value="06 Saint Joseph Ward 1">06 Saint Joseph Ward 1</option>
-            <option value="07 Saint Joseph Ward 2"> 07 Saint Joseph Ward 2</option>
-            <option value="08 Saint Mary">08 Saint Mary</option>
-            <option value="09 Saint Domenic Savio">09 Saint Domenic Savio</option>
-            <option value="10 Saint Jude">10 Saint Jude</option>
-            <option value="11 Saint Thomas">11 Saint Thomas</option>
-            <option value="12 Saint Maria Gorethi">12 Saint Maria Gorethi</option>
-            <option value="13 Saint Sebastian">13 Saint Sebastian</option>
-            <option value="14 Saint George">14 Saint George</option>
-            <option value="15 Saint Alphonsa">15 Saint Alphonsa</option>
-            <option value="16 Saint Kochu Theresa">16 Saint Kochu Theresa</option>
-
-          </select>
-        </div>
+        <label for="wardName">Sponser Ward Name</label>
+        <select id="wardName" class="form-control" required>
+          <option value="01 Saint Antony">01 Saint Antony</option>
+          <option value="02 Saint Paul">02 Saint Paul</option>
+          <option value="03 Saint Peter">03 Saint Peter</option>
+          <option value="04 Saint John">04 Saint John</option>
+          <option value="05 Saint Mathew">05 Saint Mathew</option>
+          <option value="06 Saint Joseph Ward 1">06 Saint Joseph Ward 1</option>
+          <option value="07 Saint Joseph Ward 2"> 07 Saint Joseph Ward 2</option>
+          <option value="08 Saint Mary">08 Saint Mary</option>
+          <option value="09 Saint Domenic Savio">09 Saint Domenic Savio</option>
+          <option value="10 Saint Jude">10 Saint Jude</option>
+          <option value="11 Saint Thomas">11 Saint Thomas</option>
+          <option value="12 Saint Maria Gorethi">12 Saint Maria Gorethi</option>
+          <option value="13 Saint Sebastian">13 Saint Sebastian</option>
+          <option value="14 Saint George">14 Saint George</option>
+          <option value="15 Saint Alphonsa">15 Saint Alphonsa</option>
+          <option value="16 Saint Kochu Theresa">16 Saint Kochu Theresa</option>
+        </select>
+      </div>
       <div class="form-group">
         <label for="sponsorWhatsapp">Sponsor Whatsapp number:</label>
         <input type="text" class="form-control" id="sponsorWhatsapp" pattern="\d{10}">
       </div>
     </div>
     <button type="button" class="btn btn-secondary" id="clearButton">Clear All</button>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
   </form>
 </div>
+
+<div class="loader" id="loader"></div>
 
 <!-- Modal -->
 <div id="successModal" class="modal fade" role="dialog">
@@ -78,7 +116,7 @@
         <h4 class="modal-title">Success</h4>
       </div>
       <div class="modal-body">
-        <p>Data has been successfully saved to the Google Sheet.</p>
+        <p id="modalData"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -92,6 +130,11 @@
 <script>
   document.getElementById('dataForm').addEventListener('submit', function (e) {
     e.preventDefault();
+
+    var loader = document.getElementById('loader');
+    var submitButton = document.getElementById('submitButton');
+    loader.style.display = 'block';
+    submitButton.style.display = 'none';
 
     var donorName = document.getElementById('donorName').value;
     var donorWhatsapp = document.getElementById('donorWhatsapp').value;
@@ -118,6 +161,8 @@
       mode: 'no-cors'
     }).then(response => response.json())
       .then(revData => {
+        loader.style.display = 'none';
+        submitButton.style.display = 'inline-block';
         console.log(revData);
         if (revData.success) {
           $('#successModal').modal('show');
@@ -126,8 +171,20 @@
           alert('There was an error saving the data: ' + revData.error);
         }
       }).catch(error => {
+      loader.style.display = 'none';
+      submitButton.style.display = 'inline-block';
       console.error('Error:', error);
-      alert('Data added');
+      var modalData = `
+            Donor Name:<strong class="modal-con"> ${donorName}</strong><br>
+            Donor Whatsapp:<strong class="modal-con"> ${donorWhatsapp}</strong><br>
+            <br>
+            Sponsor Name:<strong class="modal-con"> ${sponsorName}</strong><br>
+            Sponsor House Name:<strong class="modal-con"> ${houseName}</strong><br>
+            Sponsor Ward Name:<strong class="modal-con"> ${wardName}</strong><br>
+            Sponsor Whatsapp:<strong class="modal-con"> ${sponsorWhatsapp}
+          `;
+      document.getElementById('modalData').innerHTML = modalData;
+      $('#successModal').modal('show');
     });
   });
 
